@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Clientes</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Spring Boot</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarNav" aria-controls="navbarNav"
+            aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" th:href="@{/listado}">Clientes</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="text-secondary border border-success border-top-0 border-left-0 border-right-0"
+        th:text="${titulo}"></h1>
+
+    <p><a th:href="@{/formulario}" class="btn btn-success btn-xs">Agregar directorio de cliente</a></p>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>nombreCompleto</th>
+            <th>Direccion 1</th>
+            <th>Direccion 2</th>
+            <th>Ciudad</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>editar</th>
+            <th>eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente: ${clientes}">
+            <td th:text="${cliente.id}"></td>
+            <td th:text="${cliente.nombreCompleto}"></td>
+            <td th:text="${cliente.calleDireccion1}"></td>
+            <td th:text="${cliente.calleDireccion2}"></td>
+            <td th:text="${cliente.ciudad}"></td>
+            <td th:text="${cliente.estado}"></td>
+            <td th:text="${cliente.createAt}"></td>
+            <td><a class="btn btn-warning btn-xs" th:href="@{/formulario/} + ${cliente.id}" th:text="'editar'"></a></td>
+            <td><a class="btn btn-danger btn-xs"  th:href="@{/eliminar/} + ${cliente.id}" th:text="'eliminar'" onclick="return confirm('Estás seguro que quieres eliminar?');"></a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+</html>
